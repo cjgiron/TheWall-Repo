@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div id="header">
+        <h1>CodingDojo Wall: Welcome {{ user.first_name }}!</h1>
+        <a href="/logout">Logout</a>
+    </div>
+    <!-- <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Birth Date</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in all_users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.birth_date }}</td>
+                <td>{{ user.password }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
+    <form id="post_message" action="/process_message" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+        <p>
+            <p id="message_heading">Post a message:</p>
+            <textarea name="message" cols="100" rows="10"></textarea>
+        </p>
+        <button id="message_button">Post a message</button>
+    </form>
+    {% for message in all_messages %}
+        <ul>
+            <li id="user"><strong>{{ message.user.first_name }} {{ message.user.last_name }} - {{ message.created_at }}</strong>
+                <ul>
+                    <li id="message">{{ message.message_text }}
+                        <ul id="comments">
+                            {% for comment in message.comments.all %}
+                            <li><p><strong>{{ comment.user.first_name }} {{ comment.user.last_name }} - {{ comment.created_at }}</strong></p>
+                                <p id="comment">{{ comment.comment_text }}</p>
+                            </li>
+                            {% endfor %}
+                            <li>
+                                <form action="/process_comment" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                                    <input type="hidden" name="message_id" value="{{ message.id }}">
+                                    <p>
+                                        Post a Comment: <br>
+                                        <textarea name="comment" cols="75" rows="5"></textarea>
+                                    </p>
+                                    <button>Post a Comment</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    {% endfor %}
+</body>
+</html>

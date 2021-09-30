@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* outline: solid red 1px; */
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    outline: solid black 1px;
+}
+
+
+#message_area {
+    text-align: center;
+}
+
+#message_heading {
+    margin-right: 712px;
+    margin-top: 30px;
+}
+
+#post_message {
+    text-align: center;
+    /* width: 150px; */
+}
+
+#message_button {
+    margin-left: 62%;
+}
+
+#user {
+    margin-left: 150px;
+    margin-top: 5px;
+}
+
+#message {
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-right: 150px;
+}
+
+
+.previous_comments{
+    margin-left: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#comment {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#comments {
+    margin-left: 15px;
+}
